@@ -64,7 +64,7 @@ class Chef::Provider::ChefVaultSecret < Chef::Provider::LWRPBase
   def load_current_resource
     begin
       Chef::Log.debug("Attempting to load #{new_resource.id} from #{new_resource.data_bag}")
-      json = ::ChefVault::Item.load(new_resource.data_bag, new_resource.id).to_json
+      json = ::ChefVault::Item.load(new_resource.data_bag, new_resource.id).to_hash
       resource = Chef::Resource::ChefVaultSecret.new(new_resource.id)
       resource.raw_data json
       current_resource = resource
